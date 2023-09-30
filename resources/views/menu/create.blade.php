@@ -12,14 +12,14 @@
 <body>
     <div class="container">
         <div class="position-absolute top-50 start-50 translate-middle bg-warning bg-gradient rounded">
-            <form method="POST" action="/form" class="p-3" enctype="multipart/form-data">
+            <form method="POST" action="/menu" class="p-3" enctype="multipart/form-data">
                 @csrf
                 <div class="text-center display-6">Tambah Menu</div>
                 <br/>
                 <div class="form-group">
-                    <label for="Image">Image</label>
-                    <input type="file" class="form-control-file" id="Image" name="Image" accept="image/">
-                    @error('Image')
+                    <label for="foto">foto</label>
+                    <input type="file" class="form-control-file" id="foto" name="foto" accept="foto/">
+                    @error('foto')
                     <div class="alert alert-danger text">{{ $message }}</div>
                     @enderror
                 </div>
@@ -27,27 +27,39 @@
                 <div class="form-group">
                     <label for="nama">Nama</label>
                     <input type="text" class="form-control" id="nama" placeholder="" name="nama">
+                    @error('nama')
+                    <div class="alert alert-danger text">{{ $message }}</div>
+                    @enderror
                 </div>
                 <br/>
                 <div class="input-group mb-3">
                     <label class="input-group-text" for="jenis">Jenis</label>
-                    <select class="form-select" id="jenis">
-                        <option selected>Choose...</option>
+                    <select class="form-select" id="jenis" name="jenis">
+                        <option value="0" selected>Choose...</option>
                         <option value="1">Mie</option>
                         <option value="2">Nasi</option>
                         <option value="3">Teh</option>
                     </select>
+                    @error('jenis')
+                    <div class="alert alert-danger text">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label for="harga">Harga</label>
                     <input type="text" class="form-control" id="harga" placeholder="12000" name="harga">
+                    @error('harga')
+                    <div class="alert alert-danger text">{{ $message }}</div>
+                    @enderror
                 </div>
                 <br/>
                 <div class="mb-3">
                     <label for="deskripsi" class="form-label">Deskripsi</label>
-                    <textarea class="form-control" id="deskripsi" rows="5"></textarea>
+                    <textarea class="form-control" id="deskripsi" name="deskripsi" rows="5"></textarea>
+                    @error('deskripsi')
+                    <div class="alert alert-danger text">{{ $message }}</div>
+                    @enderror
                 </div>
-                <div type="submit" class="btn btn-primary">Submit</div>
+                <div type="submit"><button type="submit" class="btn btn-primary">Submit</button></div>
             </form>            
         </div>
     </div>

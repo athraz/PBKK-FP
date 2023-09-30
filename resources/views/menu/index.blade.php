@@ -13,20 +13,23 @@
     <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
         <div class="container">
             <div class="text-center display-6">Daftar Menu</div>
-                @foreach($records as $record)
-                    @foreach($record as $item => $value)
-                        @if($loop->first)
-                        <img src="{{ asset('storage/image/'.$value) }}" style="width: 200px; height: 300px;">
-                        continue
-                        @endif
-                        <div class="p-2">
-                            <a>
-                                {{$item}} = {{$value}}
-                            </a>
-                        </div>
-                    @endforeach
+                @foreach($menus as $item)
+                    @if($item->foto)
+                        <img src="{{ asset('storage/foto-menu/'.$item->foto) }}" style="width: 200px; height: 300px;">
+                    @endif
+                    <div class="p-2">
+                        <h6> Nama: {{$item->nama}}</h6>
+                        <h6> Jenis: {{$item->jenis}}</h6>
+                        <h6> Harga: {{$item->harga}}</h6>
+                        <h6> Deskripsi: {{$item->deskripsi}}</h6>
+                    </div>
                     <div class="text-center">==================================================</div>
                 @endforeach
+            </div>
+            <div class="container">
+                <div class="d-flex my-2 justify-content-end">
+                    <a href="/menu/create" class="btn btn-primary" style="max-width: 18rem;">+Tambah Menu</a>
+                </div>
             </div>
         </div>
     </nav>
