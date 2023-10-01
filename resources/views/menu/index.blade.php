@@ -10,28 +10,37 @@
 </head>
 
 <body>
-    <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
-        <div class="container">
-            <div class="text-center display-6">Daftar Menu</div>
-                @foreach($menus as $item)
-                    @if($item->foto)
-                        <img src="{{ asset('storage/foto-menu/'.$item->foto) }}" style="width: 200px; height: 300px;">
-                    @endif
-                    <div class="p-2">
-                        <h6> Nama: {{$item->nama}}</h6>
-                        <h6> Jenis: {{$item->jenis}}</h6>
-                        <h6> Harga: {{$item->harga}}</h6>
-                        <h6> Deskripsi: {{$item->deskripsi}}</h6>
-                    </div>
-                    <div class="text-center">==================================================</div>
-                @endforeach
-            </div>
-            <div class="container">
-                <div class="d-flex my-2 justify-content-end">
-                    <a href="/menu/create" class="btn btn-primary" style="max-width: 18rem;">+Tambah Menu</a>
+    <div class="container-fluid bg-primary">
+        <div class="text-center display-6">Daftar Menu</div>
+        <br />
+        @foreach($menus as $menu)
+        <div class="container bg-success-subtle">
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="{{ asset('storage/foto-menu/'.$menu->foto) }}" class="img-fluid">
+                </div>
+                <div class="col-md-6">
+                    <p>Nama : {{$menu->nama}}</p>
+                    <p>Jenis : 
+                        <?php
+                        if ($menu->jenis == 1) echo "Mie";
+                        elseif ($menu->jenis == 2) echo "Nasi";
+                        elseif ($menu->jenis == 3) echo "Teh";
+                        ?>
+                    </p>
+                    <p>Harga : Rp {{$menu->harga}}</p>
+                    <p>Deskripsi : {{$menu->deskripsi}}</p>
                 </div>
             </div>
+            <hr style="border: 2px solid black; margin: 20px 0;">
+            <br />
         </div>
-    </nav>
+        @endforeach
+        <div class="container">
+            <div class="d-flex my-2 justify-content-center">
+                <a href="/menu/create" class="btn btn-success" style="max-width: 18rem;">+Tambah Menu</a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
