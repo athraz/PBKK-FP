@@ -11,4 +11,8 @@ class Menu extends Model
 
     protected $table = "menus";
     protected $fillable = ["nama", "jenis", "harga", "deskripsi", "foto"];
+
+    public function jenis(){
+        return $this->belongsTo(Jenis::class);
+    }
 }
