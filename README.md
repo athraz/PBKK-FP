@@ -1,5 +1,5 @@
 # PBKK FP
-Week 5 Task: Display data from database.
+Week 6 Task: Relationship, Factory, dan Seeder.
 
 | Nama                      | NRP           |
 |---------------------------|---------------|
