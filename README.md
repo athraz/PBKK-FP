@@ -1,5 +1,5 @@
 # PBKK FP
-Week 6 Task: Relationship, Factory, dan Seeder.
+Week 7 Task: Laravel Breeze
 
 | Nama                      | NRP           |
 |---------------------------|---------------|
