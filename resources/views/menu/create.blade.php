@@ -1,68 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
+<x-guest-layout>
+    <form method="POST" action="{{ route('menu') }}" enctype="multipart/form-data">
+        @csrf
 
-<head>
-    <title>Input Menu</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-</head>
-
-<body>
-    <div class="container">
-        <div class="position-absolute top-50 start-50 translate-middle bg-warning bg-gradient rounded">
-            <form method="POST" action="/menu" class="p-2" enctype="multipart/form-data">
-                @csrf
-                <div class="text-center display-6">Tambah Menu</div>
-                <br />
-                <div class="form-group">
-                    <label for="nama">Nama</label>
-                    <input type="text" class="form-control" id="nama" placeholder="" name="nama">
-                    @error('nama')
-                    <div class="alert alert-danger fs-6 text">{{ $message }}</div>
-                    @enderror
-                </div>
-                <br />
-                <div class="input-group mb-3">
-                    <label class="input-group-text" for="jenis">Jenis</label>
-                    <select class="form-select" id="jenis" name="jenis">
-                        <option selected value="0">Choose...</option>
-                        <option value="1">Mie</option>
-                        <option value="2">Nasi</option>
-                        <option value="3">Teh</option>
-                    </select>
-                    @error('jenis')
-                    <div class="alert alert-danger fs-6 text">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="harga">Harga</label>
-                    <input type="text" class="form-control" id="harga" placeholder="12000" name="harga">
-                    @error('harga')
-                    <div class="alert alert-danger fs-6 text">{{ $message }}</div>
-                    @enderror
-                </div>
-                <br />
-                <div class="mb-3">
-                    <label for="deskripsi" class="form-label">Deskripsi</label>
-                    <textarea class="form-control" id="deskripsi" name="deskripsi" rows="5"></textarea>
-                    @error('deskripsi')
-                    <div class="alert alert-danger fs-6 text">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="foto">Foto</label>
-                    <input type="file" class="form-control-file" id="foto" name="foto" accept="foto-menu/">
-                    @error('foto')
-                    <div class="alert alert-danger fs-6 text">{{ $message }}</div>
-                    @enderror
-                </div>
-                <br />
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+        <!-- Name -->
+        <div>
+            <x-input-label for="name" :value="__('Name')" />
+            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+            <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
-    </div>
-</body>
 
-</html>
+        <!-- Type -->
+        <div class="mt-4">
+            <x-input-label for="type" :value="__('Type')" />
+            <select id="type" name="type" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full">
+                <option value="0" selected>-</option>
+                @foreach ($types as $item)
+                <option value="{{$item->id}}">{{$item->name}}</option>
+                @endforeach
+            </select>
+
+            <x-input-error :messages="$errors->get('type')" class="mt-2" />
+        </div>
+
+        <!-- Price -->
+        <div class="mt-4">
+            <x-input-label for="price" :value="__('Price')" />
+            <x-text-input id="price" class="block mt-1 w-full" type="text" name="price" :value="old('price')" required autofocus autocomplete="price" />
+            <x-input-error :messages="$errors->get('price')" class="mt-2" />
+        </div>
+
+        <!-- Description -->
+        <div class="mt-4">
+            <x-input-label for="description" :value="__('Description')" />
+            <textarea id="description" name="description" rows="5" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full"></textarea>
+            <x-input-error :messages="$errors->get('description')" class="mt-2" />
+        </div>
+
+        <!-- Photo -->
+        <div class="mt-4">
+            <x-input-label for="photo" :value="__('Photo')" />
+            <input id="photo" name="photo" type="file" class="block w-full text-sm text-slate-500 file:text-sm file:font-semibold file:py-2 file:px-4 file:bg-violet-50 file:text-violet-700 file:rounded-full file:border-0 file:mr-4 hover:file:bg-violet-100" />
+            <x-input-error :messages="$errors->get('photo')" class="mt-2" />
+        </div>
+
+        <div class="flex items-center justify-end mt-4">
+            <a href="/menu">
+                <x-primary-button type="button">
+                    {{ __('Back') }}
+                </x-primary-button>
+            </a>
+            <x-primary-button type="submit" class="ml-4">
+                {{ __('Add Menu') }}
+            </x-primary-button>
+        </div>
+    </form>
+</x-guest-layout>

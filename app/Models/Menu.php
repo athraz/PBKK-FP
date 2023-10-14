@@ -10,9 +10,9 @@ class Menu extends Model
     use HasFactory;
 
     protected $table = "menus";
-    protected $fillable = ["nama", "jenis", "harga", "deskripsi", "foto"];
+    protected $fillable = ["name", "type_id", "price", "description", "photo"];
 
-    public function jenis(){
-        return $this->belongsTo(Jenis::class);
+    public function type(){
+        return $this->belongsTo(Type::class);
     }
 }

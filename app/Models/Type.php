@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Jenis extends Model
+class Type extends Model
 {
     use HasFactory;
 
-    protected $table = "jeniss";
-    protected $fillable = ["nama"];
+    protected $table = "types";
+    protected $fillable = ["name"];
 
     public function menu(){
         return $this->hasMany(Menu::class);

@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Jenis>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Type>
  */
-class JenisFactory extends Factory
+class TypeFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -16,9 +16,9 @@ class JenisFactory extends Factory
      */
     public function definition(): array
     {
-        $ArrayJenis = ["Mie", "Nasi", "Kue", "Es Krim", "Sate", "Puding", "Teh", "Kopi"];
+        $typearray = ["Mie", "Nasi", "Kue", "Es Krim", "Sate", "Puding", "Teh", "Kopi"];
         return [
-            'nama' => $this->faker->randomElement($ArrayJenis)
+            'name' => $this->faker->randomElement($typearray)
         ];
     }
 }

@@ -19,11 +19,11 @@ class MenuFactory extends Factory
         $this->faker->addProvider(new Restaurant($this->faker));
 
         return [
-            'nama' => $this->faker->foodName(),
-            'jenis_id' => mt_rand(1, 5),
-            'harga' => $this->faker->randomFloat(2, 5000, 20000),
-            'deskripsi' => $this->faker->sentence(mt_rand(5, 15)),
-            'foto' => 'null.jpg'
+            'name' => $this->faker->foodName(),
+            'type_id' => mt_rand(1, 5),
+            'price' => $this->faker->randomFloat(2, 5000, 20000),
+            'description' => $this->faker->sentence(mt_rand(5, 15)),
+            'photo' => "null.jpg"
         ];
     }
 }

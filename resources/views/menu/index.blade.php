@@ -1,46 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <title>Daftar Menu</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-</head>
-
-<body>
-    <div class="container-fluid bg-primary">
-        <div class="text-center display-6">Daftar Menu</div>
-        <br />
-        @foreach($menus as $menu)
-        <div class="container bg-success-subtle">
-            <div class="row">
-                <div class="col-md-4">
-                    <img src="{{ asset('storage/foto-menu/'.$menu->foto) }}" class="img-fluid">
-                </div>
-                <div class="col-md-6">
-                    <p>Nama : {{$menu->nama}}</p>
-                    <p>Jenis : 
-                        <?php
-                        if ($menu->jenis == 1) echo "Mie";
-                        elseif ($menu->jenis == 2) echo "Nasi";
-                        elseif ($menu->jenis == 3) echo "Teh";
-                        ?>
-                    </p>
-                    <p>Harga : Rp {{$menu->harga}}</p>
-                    <p>Deskripsi : {{$menu->deskripsi}}</p>
-                </div>
-            </div>
-            <hr style="border: 2px solid black; margin: 20px 0;">
-            <br />
+<x-app-layout>
+    <x-slot name="header">
+        <div class="flex justify-between items-center">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Check Out Our Menus!') }}
+            </h2>
+            <a href="/menu/create">
+                <x-primary-button>
+                    {{ __('Add Menu') }}
+                </x-primary-button>
+            </a>
         </div>
+    </x-slot>
+
+    <div class="flex flex-wrap justify-center p-4">
+        @foreach($types as $type)
+        @php
+        $typeMenus = $menus->where('type_id', $type->id);
+        @endphp
+        @if($typeMenus->count() > 0)
+        <div class="w-full ml-5" style="margin-bottom: 60px">
+            <p class="font-semibold text-xl text-gray-800 px-4">{{$type->name}}</p>
+            <div class="flex flex-wrap">
+                @foreach($typeMenus as $menu)
+                <div class="w-1/2 p-4">
+                    <div class="bg-white shadow-lg rounded-lg p-4" style="display: flex; flex-direction: column; height: 200px; overflow: hidden;">
+                        <div class="flex" style="height: 100%;">
+                            <div class="w-1/2" style="height: 100%; overflow: hidden;">
+                                <img src="{{asset('storage/photo-menu/'.$menu->photo)}}" class="w-full h-auto object-cover rounded-lg" style="max-height: 100%;">
+                            </div>
+                            <div class="w-1/2 p-4" style="height: 100%; overflow: hidden;">
+                                <h3 class="text-xl font-semibold mb-2">{{$menu->name}}</h3>
+                                <p class="text-gray-600">{{$menu->description}}</p>
+                                <p class="text-gray-950 mt-4">Rp {{$menu->price}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+        @endif
         @endforeach
-        <div class="container">
-            <div class="d-flex my-2 justify-content-center">
-                <a href="/menu/create" class="btn btn-success" style="max-width: 18rem;">+Tambah Menu</a>
-            </div>
-        </div>
     </div>
-</body>
-</html>
+</x-app-layout>

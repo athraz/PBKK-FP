@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Menu;
+use App\Models\Type;
 use Illuminate\Http\Request;
 
 class MenuController extends Controller
@@ -10,47 +11,50 @@ class MenuController extends Controller
     public function index()
     {
         $menus = Menu::all();
-        return view('menu.index', compact('menus'));
+        $types = Type::all();
+        return view('menu.index', compact('menus', 'types'));
     }
 
     public function create()
     {
-        return view('menu.create');
+        $types = Type::all();
+        return view('menu.create', compact('types'));
     }
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->validate(
             [
-                'nama' => 'required',
-                'jenis' => 'gt:0',
-                'harga' => 'required|numeric',
-                'deskripsi' => 'required',
-                'foto' => 'required|mimes:jpeg,jpg,png'
+                'name' => 'required',
+                'type' => 'gt:0',
+                'price' => 'required|numeric',
+                'description' => 'required',
+                'photo' => 'required|mimes:jpg,jpeg,png'
             ],
             [
-                'nama.required' => 'Masukkan nama menu!',
-                'jenis.gt' => 'Pilih jenis menu!',
-                'harga.required' => 'Masukkan harga menu!',
-                'harga.numeric' => 'Harga harus berupa bilangan',
-                'deskripsi.required' => 'Masukkan deskripsi menu!',
-                'foto.required' => 'Masukkan foto menu!',
-                'foto.mimes' => 'Format foto harus jpg, jpeg, atau png!'
+                'name.required' => 'Name can\'t be empty!',
+                'type.gt' => 'Please select menu\'s type!',
+                'price.required' => 'Price can\'t be empty!',
+                'price.numeric' => 'Price must be numeric!',
+                'description.required' => 'Description can\'t be empty!',
+                'photo.required' => 'Photo can\'t be empty!',
+                'photo.mimes' => 'Allowed extensions are .jpg, .jpeg, and .png!'
             ]
         );
 
-        $file_foto = $request->file('foto');
-        if ($file_foto != NULL) {
-            $file_ext = $file_foto->extension();
-            $file_baru = date('ymdhis') . "." . $file_ext;
-            $file_foto->storeAs('public/foto-menu', $file_baru);
+        $file_photo = $request->file('photo');
+        if ($file_photo != NULL) {
+            $file_ext = $file_photo->extension();
+            $file_new = date('ymdhis') . "." . $file_ext;
+            $file_photo->storeAs('public/photo-menu', $file_new);
 
             Menu::create([
-                'nama' => $request->nama,
-                'jenis' => $request->jenis,
-                'harga' => $request->harga,
-                'deskripsi' => $request->deskripsi,
-                'foto' => $file_baru
+                'name' => $request->name,
+                'type_id' => $request->type,
+                'price' => $request->price,
+                'description' => $request->description,
+                'photo' => $file_new
             ]);
         }
 
