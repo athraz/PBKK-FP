@@ -1,5 +1,5 @@
 # PBKK FP
-Week 7 Task: Laravel Breeze
+Week 8 Task: Onion Architecture
 
 | Nama                      | NRP           |
 |---------------------------|---------------|
