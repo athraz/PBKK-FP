@@ -31,6 +31,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/menu', [MenuController::class, 'index'])->name('menu');
     Route::post('/menu', [MenuController::class, 'store']);
     Route::get('/menu/create', [MenuController::class, 'create']);
+    Route::get('/menu/{id}', [MenuController::class, 'show']);
+    Route::get('/menu/{id}/edit', [MenuController::class, 'edit']);
+    Route::put('/menu/{id}', [MenuController::class, 'update']);
+    Route::delete('/menu/{id}', [MenuController::class, 'destroy']);
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

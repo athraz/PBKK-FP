@@ -20,7 +20,6 @@ class MenuFactory extends Factory
 
         return [
             'name' => $this->faker->foodName(),
-            'type_id' => mt_rand(1, 5),
             'price' => $this->faker->randomFloat(2, 5000, 20000),
             'description' => $this->faker->sentence(mt_rand(5, 15)),
             'photo' => "null.jpg"
