@@ -5,13 +5,20 @@ namespace App\Http\Controllers;
 use App\Models\Menu;
 use App\Models\Type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class MenuController extends Controller
 {
     public function index()
     {
-        $menus = Menu::all();
-        $types = Type::all();
+        // $menus = Menu::all();
+        // $types = Type::all();
+        $menus = Cache::remember('menus', 600, function () {
+            return Menu::all();
+        });
+        $types = Cache::remember('types', 600, function () {
+            return Type::all();
+        });
         return view('menu.index', compact('menus', 'types'));
     }
 
