@@ -11,14 +11,10 @@ class MenuController extends Controller
 {
     public function index()
     {
-        // $menus = Menu::all();
-        // $types = Type::all();
         $menus = Cache::remember('menus', 600, function () {
             return Menu::all();
         });
-        $types = Cache::remember('types', 600, function () {
-            return Type::all();
-        });
+        $types = Type::all();
         return view('menu.index', compact('menus', 'types'));
     }
 
@@ -63,6 +59,8 @@ class MenuController extends Controller
                 'description' => $request->description,
                 'photo' => $file_new
             ]);
+
+            Cache::forget('menus');
         }
 
         return redirect('/menu');
@@ -127,12 +125,14 @@ class MenuController extends Controller
         }
 
         $menus = Menu::findOrFail($id);
+        Cache::forget('menus');
         return view('menu.show', compact('menus'));
     }
 
     public function destroy($id)
     {
         Menu::findOrFail($id)->delete();
+        Cache::forget('menus');
         return redirect('/menu');
     }
 }
