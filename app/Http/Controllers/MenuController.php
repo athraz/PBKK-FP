@@ -68,21 +68,20 @@ class MenuController extends Controller
 
     public function show($id)
     {
-        $menus = Menu::findOrFail($id);
+        $menu = Menu::findOrFail($id);
         $types = Type::all();
-        return view('menu.show', compact('menus', 'types'));
+        return view('menu.show', compact('menu', 'types'));
     }
 
     public function edit($id)
     {
-        $menus = Menu::findOrFail($id);
+        $menu = Menu::findOrFail($id);
         $types = Type::all();
-        return view('menu.edit', compact('menus', 'types'));
+        return view('menu.edit', compact('menu', 'types'));
     }
 
     public function update(Request $request, $id)
     {
-        // dd($request->all());
         $request->validate(
             [
                 'name' => 'required',
@@ -124,9 +123,9 @@ class MenuController extends Controller
             ]);
         }
 
-        $menus = Menu::findOrFail($id);
+        $menu = Menu::findOrFail($id);
         Cache::forget('menus');
-        return view('menu.show', compact('menus'));
+        return view('menu.show', compact('menu'));
     }
 
     public function destroy($id)

@@ -1,4 +1,8 @@
 <x-guest-layout>
+    <h2 class="font-semibold text-xl text-gray-800 leading-tight flex justify-center">
+        {{ __('Add New Menu') }}
+    </h2>
+
     <form method="POST" action="{{ route('menu') }}" enctype="multipart/form-data">
         @csrf
 
