@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\TypeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,6 +36,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/menu/{id}/edit', [MenuController::class, 'edit']);
     Route::put('/menu/{id}', [MenuController::class, 'update']);
     Route::delete('/menu/{id}', [MenuController::class, 'destroy']);
+    
+    Route::get('/type', [TypeController::class, 'index'])->name('type');
+    Route::post('/type', [TypeController::class, 'store']);
+    Route::get('/type/create', [TypeController::class, 'create']);
+    Route::get('/type/{id}/edit', [TypeController::class, 'edit']);
+    Route::put('/type/{id}', [TypeController::class, 'update']);
+    Route::delete('/type/{id}', [TypeController::class, 'destroy']);
 });
 
 require __DIR__ . '/auth.php';
