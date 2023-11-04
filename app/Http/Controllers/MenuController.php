@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Menu;
+use App\Models\Review;
 use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -70,7 +71,8 @@ class MenuController extends Controller
     {
         $menu = Menu::findOrFail($id);
         $types = Type::all();
-        return view('menu.show', compact('menu', 'types'));
+        $reviews = Review::all();
+        return view('menu.show', compact('menu', 'types', 'reviews'));
     }
 
     public function edit($id)

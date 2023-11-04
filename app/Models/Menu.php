@@ -15,4 +15,8 @@ class Menu extends Model
     public function type(){
         return $this->belongsTo(Type::class);
     }
+
+    public function review(){
+        return $this->hasMany(Review::class);
+    }
 }
