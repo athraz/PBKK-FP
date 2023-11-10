@@ -48,7 +48,7 @@
             <p class="font-semibold text-xl text-gray-800 px-4">{{$menureviews->count()}} Reviews</p>
             <hr style="margin: 20px 0; border-top: 1px solid black;">
 
-            <form method="POST" action="{{ route('review', ['id' => $menu->id]) }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('review.create', ['id' => $menu->id]) }}" enctype="multipart/form-data">
                 @csrf
                 <div class="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 shadow-lg">
 

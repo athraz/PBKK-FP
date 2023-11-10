@@ -125,9 +125,11 @@ class MenuController extends Controller
             ]);
         }
 
-        $menu = Menu::findOrFail($id);
         Cache::forget('menus');
-        return view('menu.show', compact('menu'));
+        $menu = Menu::findOrFail($id);
+        $types = Type::all();
+        $reviews = Review::all();
+        return view('menu.show', compact('menu', 'types', 'reviews'));
     }
 
     public function destroy($id)
