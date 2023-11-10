@@ -17,9 +17,6 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         Type::factory(5)->has(Menu::factory()->count(4))->create();
-        DB::table('roles')->insert(['name' => 'admin']);
-        DB::table('roles')->insert(['name' => 'employee']);
-        DB::table('roles')->insert(['name' => 'user']);
-        DB::table('users')->insert(['name' => 'admin', 'email' => 'admin@gmail.com', 'password' => Hash::make('12345678'), 'role_id' => 1]);
+        DB::table('users')->insert(['name' => 'admin', 'email' => 'admin@gmail.com', 'password' => Hash::make('12345678'), 'role' => 'admin']);
     }
 }
