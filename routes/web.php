@@ -50,10 +50,13 @@ Route::middleware('auth')->group(function () {
     Route::post('/menu/{id}', [ReviewController::class,'store'])->name('review.create');
 
     Route::get('/cart', [CartController::class, 'index'])->name('cart');
-    Route::post('/menu', [CartController::class,'store'])->name('cart.create');
-    Route::delete('/cart', [CartController::class,'destroy'])->name('cart.delete');
+    Route::post('/menu', [CartController::class, 'store'])->name('cart.create');
+    Route::delete('/cart', [CartController::class, 'destroy'])->name('cart.delete');
+    Route::put('/cart', [CartController::class, 'update'])->name('cart.update');
 
-    Route::post('/cart', [OrderController::class,'store'])->name('order.create');
+    Route::get('/order', [OrderController::class,'index'])->name('order');
+    Route::post('/order', [OrderController::class, 'store']);
+    Route::get('/order/create', [OrderController::class, 'create']);
 });
 
 require __DIR__ . '/auth.php';

@@ -7,6 +7,7 @@ use App\Models\Menu;
 use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
@@ -40,6 +41,28 @@ class CartController extends Controller
         }
 
         return redirect('/menu');
+    }
+
+    public function update(Request $request)
+    {
+        $userId = Auth::user()->id;
+        $carts = DB::table('carts')->where('user_id', $userId)->get();
+
+        foreach ($carts as $cart) {
+            $menuId = $cart->menu_id;
+            $quantityFieldName = 'quantity-' . $menuId;
+
+            if ($request->has($quantityFieldName)) {
+                $newQuantity = $request->input($quantityFieldName);
+
+                DB::table('carts')
+                    ->where('user_id', $userId)
+                    ->where('menu_id', $menuId)
+                    ->update(['quantity' => $newQuantity]);
+            }
+        }
+
+        return redirect('/order/create');
     }
 
     public function destroy(Request $request)
