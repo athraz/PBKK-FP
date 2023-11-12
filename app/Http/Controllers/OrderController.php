@@ -15,7 +15,9 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::all();
-        return view('order.index', compact('orders'));
+        $ordermenus = OrderMenu::all();
+        $menus = Menu::all();
+        return view('order.index', compact('orders', 'ordermenus', 'menus'));
     }
 
     public function create()
@@ -45,7 +47,7 @@ class OrderController extends Controller
             'total_price' => $request->total_price,
             'payment_method' => $request->payment_method,
             'address' => $request->address,
-            'status' => 'pending'
+            'status' => 'Waiting'
         ]);
 
         $carts = Cart::where('user_id', Auth::user()->id)->get();
