@@ -4,11 +4,13 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('This is Our Menu Types!') }}
             </h2>
+            @if(Auth::user()->role == 'admin')
             <a href="/type/create">
                 <x-primary-button>
                     {{ __('Add Type') }}
                 </x-primary-button>
             </a>
+            @endif
         </div>
     </x-slot>
 
@@ -33,6 +35,7 @@
                     <div class="w-1/2 px-4" style="height: 100%; overflow: hidden;">
                         <h3 class="text-xl font-semibold mb-2">{{strlen($type->name) > 30 ? substr($type->name, 0, 30) . "..." : $type->name}}</h3>
                         <div class="flex items-center">
+                            @if(Auth::user()->role == 'admin')
                             <a href="/type/{{$type->id}}/edit">
                                 <x-primary-button>
                                     {{ __('Edit') }}
@@ -45,6 +48,7 @@
                                     {{ __('Delete') }}
                                 </button>
                             </form>
+                            @endif
                         </div>
                     </div>
                 </div>

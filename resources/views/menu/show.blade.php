@@ -10,6 +10,7 @@
                         {{ __('Back') }}
                     </x-primary-button>
                 </a>
+                @if(Auth::user()->role == 'admin')
                 <a href="/menu/{{$menu->id}}/edit" class="mx-2">
                     <x-primary-button>
                         {{ __('Edit Menu') }}
@@ -22,6 +23,7 @@
                         {{ __('Delete Menu') }}
                     </button>
                 </form>
+                @endif
             </div>
         </div>
     </x-slot>

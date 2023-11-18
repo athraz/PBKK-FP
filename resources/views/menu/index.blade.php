@@ -4,11 +4,13 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Check Out Our Menus!') }}
             </h2>
+            @if(Auth::user()->role == 'admin')
             <a href="/menu/create">
                 <x-primary-button>
                     {{ __('Add Menu') }}
                 </x-primary-button>
             </a>
+            @endif
         </div>
     </x-slot>
 

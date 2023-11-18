@@ -12,9 +12,16 @@
         </div>
     </x-slot>
 
-    @php
-    $userorders = $orders->where('user_id', Auth::user()->id)->sortByDesc('id');
-    @endphp
+    @if(Auth::user()->role == 'admin')
+        @php
+        $userorders = $orders;
+        @endphp
+    @else
+        @php
+        $userorders = $orders->where('user_id', Auth::user()->id)->sortByDesc('id');
+        @endphp
+    @endif
+    
 
     <div class="flex flex-wrap justify-center">
         <div class="w-4/5 p-4">
