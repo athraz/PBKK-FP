@@ -20,17 +20,17 @@
             <div class="bg-white shadow-lg rounded-lg p-4" style="display: flex; flex-direction: column; height: 150px; overflow: hidden;">
                 <div class="flex" style="height: 100%;">
                     @php
-                        $typeMenus = $menus->where('type_id', $type->id);
-                        $firstTypeMenu = $typeMenus->first();
+                    $typeMenus = $menus->where('type_id', $type->id);
+                    $firstTypeMenu = $typeMenus->first();
                     @endphp
                     @if($firstTypeMenu)
-                        <div class="w-1/2 flex justify-content-center" style="height: 100%; overflow: hidden;">
-                            <img src="{{asset('storage/photo-menu/'.$firstTypeMenu->photo)}}" class="w-full h-auto object-cover rounded-lg" style="max-height: 100%;">
-                        </div>
+                    <div class="w-1/2 flex justify-content-center" style="height: 100%; overflow: hidden;">
+                        <img src="{{asset('storage/photo-menu/'.$firstTypeMenu->photo)}}" class="w-full h-auto object-cover rounded-lg" style="max-height: 100%;">
+                    </div>
                     @else
                     <div class="w-1/2 flex justify-content-center" style="height: 100%; overflow: hidden;">
-                            <img src="{{asset('storage/photo-menu/null.jpg')}}" class="w-full h-auto object-cover rounded-lg" style="max-height: 100%;">
-                        </div>
+                        <img src="{{asset('storage/photo-menu/null.jpg')}}" class="w-full h-auto object-cover rounded-lg" style="max-height: 100%;">
+                    </div>
                     @endif
                     <div class="w-1/2 px-4" style="height: 100%; overflow: hidden;">
                         <h3 class="text-xl font-semibold mb-2">{{strlen($type->name) > 30 ? substr($type->name, 0, 30) . "..." : $type->name}}</h3>

@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\TypeController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -57,5 +58,10 @@ Route::put('/cart', [CartController::class, 'update'])->middleware(['auth'])->na
 Route::get('/order', [OrderController::class, 'index'])->middleware(['auth'])->name('order');
 Route::post('/order', [OrderController::class, 'store'])->middleware(['auth']);
 Route::get('/order/create', [OrderController::class, 'create'])->middleware(['auth']);
+
+Route::get('/user', [UserController::class, 'index'])->middleware(['auth', 'admin'])->name('user');
+Route::post('/user', [UserController::class, 'store'])->middleware(['auth', 'admin']);
+Route::get('/user/create', [UserController::class, 'create'])->middleware(['auth', 'admin']);
+Route::delete('/user/{id}', [UserController::class, 'destroy'])->middleware(['auth', 'admin']);
 
 require __DIR__ . '/auth.php';

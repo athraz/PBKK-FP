@@ -27,6 +27,11 @@
                     <x-nav-link :href="route('order')" :active="request()->routeIs('order')">
                         {{ __('Order') }}
                     </x-nav-link>
+                    @if(Auth::user()->role == 'admin')
+                    <x-nav-link :href="route('user')" :active="request()->routeIs('user')">
+                        {{ __('User') }}
+                    </x-nav-link>
+                    @endif
                 </div>
             </div>
 
