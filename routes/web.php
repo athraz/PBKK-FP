@@ -58,6 +58,8 @@ Route::put('/cart', [CartController::class, 'update'])->middleware(['auth'])->na
 Route::get('/order', [OrderController::class, 'index'])->middleware(['auth'])->name('order');
 Route::post('/order', [OrderController::class, 'store'])->middleware(['auth']);
 Route::get('/order/create', [OrderController::class, 'create'])->middleware(['auth']);
+Route::post('/order/take/{id}', [OrderController::class, 'take'])->middleware(['auth'])->name('order.take');
+Route::post('/order/done/{id}', [OrderController::class, 'done'])->middleware(['auth'])->name('order.done');
 
 Route::get('/user', [UserController::class, 'index'])->middleware(['auth', 'admin'])->name('user');
 Route::post('/user', [UserController::class, 'store'])->middleware(['auth', 'admin']);

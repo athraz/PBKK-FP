@@ -47,7 +47,8 @@ class OrderController extends Controller
             'total_price' => $request->total_price,
             'payment_method' => $request->payment_method,
             'address' => $request->address,
-            'status' => 'Waiting'
+            'status' => 'Waiting',
+            'employee_id' => Auth::user()->id
         ]);
 
         $carts = Cart::where('user_id', Auth::user()->id)->get();
@@ -61,6 +62,25 @@ class OrderController extends Controller
         }
 
         Cart::where('user_id', Auth::user()->id)->delete();
+
+        return redirect('/order');
+    }
+
+    public function take($id)
+    {
+        Order::findOrFail($id)->update([
+            'status' => 'On Delivery',
+            'employee_id' => Auth::user()->id,
+        ]);
+
+        return redirect('/order');
+    }
+
+    public function done($id)
+    {
+        Order::findOrFail($id)->update([
+            'status' => 'Delivered',
+        ]);
 
         return redirect('/order');
     }

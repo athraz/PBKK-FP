@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('payment_method');
             $table->string('address');
             $table->string('status');
+            $table->foreignId('employee_id')->references('id')->on('users')->onDelete('cascade')->constrained();
             $table->timestamps();
         });
     }
