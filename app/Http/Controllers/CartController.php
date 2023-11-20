@@ -65,6 +65,12 @@ class CartController extends Controller
         return redirect('/order/create');
     }
 
+    public function delete($id)
+    {
+        $cart = Cart::findOrFail($id);
+        return view('cart.delete', compact('cart'));
+    }
+
     public function destroy(Request $request)
     {
         Cart::findOrFail($request->id)->delete();

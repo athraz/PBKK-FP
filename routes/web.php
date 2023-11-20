@@ -52,7 +52,8 @@ Route::post('/menu/{id}', [ReviewController::class, 'store'])->middleware(['auth
 
 Route::get('/cart', [CartController::class, 'index'])->middleware(['auth'])->name('cart');
 Route::post('/menu', [CartController::class, 'store'])->middleware(['auth'])->name('cart.create');
-Route::delete('/cart', [CartController::class, 'destroy'])->middleware(['auth'])->name('cart.delete');
+Route::get('/cart/{id}', [CartController::class, 'delete'])->middleware(['auth']);
+Route::delete('/cart/{id}', [CartController::class, 'destroy'])->middleware(['auth']);
 Route::put('/cart', [CartController::class, 'update'])->middleware(['auth'])->name('cart.update');
 
 Route::get('/order', [OrderController::class, 'index'])->middleware(['auth'])->name('order');

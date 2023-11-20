@@ -70,7 +70,7 @@
 
 
         <div class="flex items-center justify-end mt-4">
-            <a href="/menu">
+            <a href="/cart">
                 <x-primary-button type="button">
                     {{ __('Back') }}
                 </x-primary-button>
