@@ -4,11 +4,43 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('These are your orders!') }}
             </h2>
-            <a href="/menu">
-                <x-primary-button>
-                    {{ __('Order another') }}
-                </x-primary-button>
-            </a>
+
+            <div class="flex justify-end">
+                <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 mx-2" type="button">Status <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                    </svg>
+                </button>
+
+                <!-- Dropdown menu -->
+                <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg border border-gray-300 shadow w-30 dark:bg-gray-700">
+                    <ul class="px-4 py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+                        <li>
+                            <div class="flex items-center">
+                                <input checked id="waiting-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="waiting-checkbox" class="px-2 py-2 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Waiting</label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="flex items-center">
+                                <input checked id="ondelivery-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="ondelivery-checkbox" class="px-2 py-2 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">On Delivery</label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="flex items-center">
+                                <input id="delivered-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="delivered-checkbox" class="px-2 py-2 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Delivered</label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <a href="/menu">
+                    <x-primary-button>
+                        {{ __('Order another') }}
+                    </x-primary-button>
+                </a>
+            </div>
         </div>
     </x-slot>
 
@@ -18,7 +50,7 @@
     @endphp
     @elseif(Auth::user()->role == 'employee')
     @php
-    
+
     $userorders = $orders->where('status', 'Waiting');
     @endphp
     @else
@@ -36,11 +68,11 @@
             @if($takenorder->count() > 0)
             <div class="w-full" style="margin-bottom: 30px">
                 <div class="flex flex-wrap">
-                    @foreach($takenorder as $order)
                     <div class="w-full p-4">
-                        <div class="bg-white shadow-lg rounded-lg p-4" style="display: flex; flex-direction: column; overflow: hidden;">
+                        @foreach($takenorder as $order)
+                        <div class="bg-white shadow-lg rounded-lg p-4 mb-8" style="display: flex; flex-direction: column; overflow: hidden;">
                             <div class="flex justify-between" style="height: 100%;">
-                                <div class="w-1/6 px-4 flex items-center" style="height: 100%; overflow: hidden;">
+                                <div class="w-1/4 px-4 flex items-center" style="height: 100%; overflow: hidden;">
                                     <h3 class="text-md font-semibold">Order ID: {{$order->id}}</h3>
                                 </div>
                                 @if(($order->status == "On Delivery" || $order->status == "Delivered"))
@@ -48,10 +80,10 @@
                                     <h3 class="text-md font-semibold">Employee: {{$order->employee->name}}</h3>
                                 </div>
                                 @endif
-                                <div class="w-1/2 px-4 flex items-center justify-end" style="height: 100%; overflow: hidden;">
+                                <div class="w-1/3 px-4 flex items-center justify-end" style="height: 100%; overflow: hidden;">
                                     <h3 class="text-md font-semibold">{{$order->address}}</h3>
                                 </div>
-                                <div class="w-1/6 px-4 flex items-center justify-end" style="height: 100%; overflow: hidden;">
+                                <div class="w-1/4 px-4 flex items-center justify-end" style="height: 100%; overflow: hidden;">
                                     <h3 class="text-md font-semibold">{{$order->created_at}}</h3>
                                 </div>
                             </div>
@@ -131,19 +163,19 @@
                                 </div>
                             </div>
                         </div>
+                        @endforeach
                     </div>
-                    @endforeach
                 </div>
             </div>
             @endif
-            @if($userorders->count() > 0)
+            @if($takenorder->count() == 0 && $userorders->count() > 0)
             <div class="w-full" style="margin-bottom: 30px">
                 <div class="flex flex-wrap">
-                    @foreach($userorders as $order)
-                    <div class="w-full p-4">
-                        <div class="bg-white shadow-lg rounded-lg p-4" style="display: flex; flex-direction: column; overflow: hidden;">
+                    <div class="w-full p-4 ">
+                        @foreach($userorders as $order)
+                        <div class="bg-white shadow-lg rounded-lg p-4 mb-8 @if($order->status == 'Waiting') waiting-order @elseif($order->status == 'On Delivery') ondelivery-order @elseif($order->status == 'Delivered') delivered-order @endif" style="display: flex; flex-direction: column; overflow: hidden;">
                             <div class="flex justify-between" style="height: 100%;">
-                                <div class="w-1/3 px-4 flex items-center" style="height: 100%; overflow: hidden;">
+                                <div class="w-1/4 px-4 flex items-center" style="height: 100%; overflow: hidden;">
                                     <h3 class="text-md font-semibold">Order ID: {{$order->id}}</h3>
                                 </div>
                                 @if(($order->status == "On Delivery" || $order->status == "Delivered"))
@@ -151,10 +183,10 @@
                                     <h3 class="text-md font-semibold">Employee: {{$order->employee->name}}</h3>
                                 </div>
                                 @endif
-                                <div class="w-1/2 px-4 flex items-center justify-end" style="height: 100%; overflow: hidden;">
+                                <div class="w-1/3 px-4 flex items-center justify-end" style="height: 100%; overflow: hidden;">
                                     <h3 class="text-md font-semibold">{{$order->address}}</h3>
                                 </div>
-                                <div class="w-1/6 px-4 flex items-center justify-end" style="height: 100%; overflow: hidden;">
+                                <div class="w-1/4 px-4 flex items-center justify-end" style="height: 100%; overflow: hidden;">
                                     <h3 class="text-md font-semibold">{{$order->created_at}}</h3>
                                 </div>
                             </div>
@@ -234,11 +266,54 @@
                                 </div>
                             </div>
                         </div>
+                        @endforeach
                     </div>
-                    @endforeach
                 </div>
             </div>
             @endif
         </div>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var waitingCheckbox = document.getElementById("waiting-checkbox");
+            var waitingOrders = document.querySelectorAll(".waiting-order");
+
+            function toggleWaitingOrders() {
+                var displayValue = waitingCheckbox.checked ? "flex" : "none";
+                waitingOrders.forEach(function(order) {
+                    order.style.display = displayValue;
+                });
+            }
+
+            toggleWaitingOrders();
+            waitingCheckbox.addEventListener("change", toggleWaitingOrders);
+
+            var ondeliveryCheckbox = document.getElementById("ondelivery-checkbox");
+            var ondeliveryOrders = document.querySelectorAll(".ondelivery-order");
+
+            function toggleOnDeliveryOrders() {
+                var displayValue = ondeliveryCheckbox.checked ? "flex" : "none";
+                ondeliveryOrders.forEach(function(order) {
+                    order.style.display = displayValue;
+                });
+            }
+
+            toggleOnDeliveryOrders();
+            ondeliveryCheckbox.addEventListener("change", toggleOnDeliveryOrders);
+
+            var deliveredCheckbox = document.getElementById("delivered-checkbox");
+            var deliveredOrders = document.querySelectorAll(".delivered-order");
+
+            function toggleDeliveredOrders() {
+                var displayValue = deliveredCheckbox.checked ? "flex" : "none";
+                deliveredOrders.forEach(function(order) {
+                    order.style.display = displayValue;
+                });
+            }
+
+            toggleDeliveredOrders();
+            deliveredCheckbox.addEventListener("change", toggleDeliveredOrders);
+        });
+    </script>
 </x-app-layout>
