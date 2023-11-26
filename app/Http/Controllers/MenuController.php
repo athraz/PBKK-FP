@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Menu;
+use App\Models\OrderMenu;
 use App\Models\Review;
 use App\Models\Type;
 use Illuminate\Http\Request;
@@ -16,7 +17,9 @@ class MenuController extends Controller
             return Menu::all();
         });
         $types = Type::all();
-        return view('menu.index', compact('menus', 'types'));
+        $ordermenus = OrderMenu::all();
+        $reviews = Review::all();
+        return view('menu.index', compact('menus', 'types', 'ordermenus', 'reviews'));
     }
 
     public function create()

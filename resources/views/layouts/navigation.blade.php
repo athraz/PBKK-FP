@@ -18,9 +18,11 @@
                     <x-nav-link :href="route('menu')" :active="request()->routeIs('menu')">
                         {{ __('Menu') }}
                     </x-nav-link>
+                    @if(Auth::check() && Auth::user()->role == 'admin')
                     <x-nav-link :href="route('type')" :active="request()->routeIs('type')">
                         {{ __('Type') }}
                     </x-nav-link>
+                    @endif
                     <x-nav-link :href="route('cart')" :active="request()->routeIs('cart')">
                         {{ __('Cart') }}
                     </x-nav-link>
