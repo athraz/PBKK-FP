@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('menu')" :active="request()->routeIs('menu')">
                         {{ __('Menu') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('promo')" :active="request()->routeIs('promo')">
+                        {{ __('Promo') }}
+                    </x-nav-link>
                     @if(Auth::check() && Auth::user()->role == 'admin')
                     <x-nav-link :href="route('type')" :active="request()->routeIs('type')">
                         {{ __('Type') }}

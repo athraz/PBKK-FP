@@ -27,4 +27,8 @@ class Menu extends Model
     public function order_menu(){
         return $this->hasMany(OrderMenu::class);
     }
+
+    public function promo_menu(){
+        return $this->hasMany(PromoMenu::class);
+    }
 }

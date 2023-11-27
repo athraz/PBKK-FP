@@ -4,6 +4,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\PromoController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UserController;
@@ -63,5 +64,9 @@ Route::get('/user', [UserController::class, 'index'])->middleware(['auth', 'admi
 Route::post('/user', [UserController::class, 'store'])->middleware(['auth', 'admin']);
 Route::get('/user/create', [UserController::class, 'create'])->middleware(['auth', 'admin']);
 Route::delete('/user/{id}', [UserController::class, 'destroy'])->middleware(['auth', 'admin']);
+
+Route::get('/promo', [PromoController::class, 'index'])->middleware(['auth'])->name('promo');
+Route::post('/promo', [PromoController::class, 'store'])->middleware(['auth']);
+Route::get('/promo/create', [PromoController::class, 'create'])->middleware(['auth']);
 
 require __DIR__ . '/auth.php';
