@@ -69,7 +69,14 @@
                                     </svg>
                                 </div>
                             </div>
+                            @if($menu->price == $menu->original_price)
                             <p class="text-gray-950 my-4">Rp {{$menu->price}}</p>
+                            @else
+                            <div class="flex">
+                            <p class="text-gray-950 my-4 mr-2 line-through">Rp {{$menu->original_price}}</p>
+                            <p class="text-gray-950 my-4">Rp {{$menu->price}}</p>
+                            </div>
+                            @endif
                             <div class="flex justify-between">
                                 <a href="/menu/{{$menu->id}}">
                                     <x-primary-button>
