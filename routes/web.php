@@ -49,7 +49,7 @@ Route::delete('/type/{id}', [TypeController::class, 'destroy'])->middleware(['au
 Route::post('/menu/{id}', [ReviewController::class, 'store'])->middleware(['auth'])->name('review.create');
 
 Route::get('/cart', [CartController::class, 'index'])->middleware(['auth'])->name('cart');
-Route::post('/menu', [CartController::class, 'store'])->middleware(['auth'])->name('cart.create');
+Route::post('/cart', [CartController::class, 'store'])->middleware(['auth'])->name('cart.create');
 Route::get('/cart/{id}', [CartController::class, 'delete'])->middleware(['auth']);
 Route::delete('/cart/{id}', [CartController::class, 'destroy'])->middleware(['auth']);
 Route::put('/cart', [CartController::class, 'update'])->middleware(['auth'])->name('cart.update');
@@ -67,6 +67,6 @@ Route::delete('/user/{id}', [UserController::class, 'destroy'])->middleware(['au
 
 Route::get('/promo', [PromoController::class, 'index'])->middleware(['auth'])->name('promo');
 Route::post('/promo', [PromoController::class, 'store'])->middleware(['auth']);
-Route::get('/promo/create', [PromoController::class, 'create'])->middleware(['auth']);
+Route::get('/promo/create', [PromoController::class, 'create'])->middleware(['auth', 'admin']);
 
 require __DIR__ . '/auth.php';

@@ -13,7 +13,8 @@ class PromoController extends Controller
     {
         $promos = Promo::all();
         $promomenus = PromoMenu::all();
-        return view('promo.index', compact('promos', 'promomenus'));
+        $menus = Menu::all();
+        return view('promo.index', compact('promos', 'promomenus', 'menus'));
     }
 
     public function create()
@@ -63,7 +64,8 @@ class PromoController extends Controller
             'name' => $request->name,
             'discount' => $request->discount,
             'start_time' => $request->start_time,
-            'end_time' => $request->end_time
+            'end_time' => $request->end_time,
+            'is_active' => 0,
         ]);
 
         foreach ($request->menus as $menu) {

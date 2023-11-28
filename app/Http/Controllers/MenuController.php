@@ -60,6 +60,7 @@ class MenuController extends Controller
                 'name' => $request->name,
                 'type_id' => $request->type,
                 'price' => $request->price,
+                'original_price' => $request->price,
                 'description' => $request->description,
                 'photo' => $file_new
             ]);
@@ -115,6 +116,7 @@ class MenuController extends Controller
                 'name' => $request->name,
                 'type_id' => $request->type,
                 'price' => $request->price,
+                'original_price' => $request->price,
                 'description' => $request->description,
                 'photo' => $file_new
             ]);
@@ -124,6 +126,7 @@ class MenuController extends Controller
                 'name' => $request->name,
                 'type_id' => $request->type,
                 'price' => $request->price,
+                'original_price' => $request->price,
                 'description' => $request->description
             ]);
         }
