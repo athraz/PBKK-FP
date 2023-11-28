@@ -10,7 +10,7 @@ class Promo extends Model
     use HasFactory;
 
     protected $table = "promos";
-    protected $fillable = ["name", "discount", "start_time", "end_time"];
+    protected $fillable = ["name", "discount", "start_time", "end_time", "is_active"];
 
     public function promo_menu(){
         return $this->hasMany(PromoMenu::class);

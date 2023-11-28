@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->foreignId('type_id')->references('id')->on('types')->onDelete('cascade')->constrained();
             $table->decimal('price', 10, 2);
+            $table->decimal('original_price', 10, 2);
             $table->string('description');
             $table->string('photo');
             $table->timestamps();

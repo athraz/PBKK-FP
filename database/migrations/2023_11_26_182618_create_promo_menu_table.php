@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('promo_id')->references('id')->on('promos')->onDelete('cascade')->constrained();
             $table->foreignId('menu_id')->references('id')->on('menus')->onDelete('cascade')->constrained();
-            $table->decimal('original_price', 10, 2)->nullable;
             $table->timestamps();
         });
     }

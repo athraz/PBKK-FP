@@ -10,7 +10,7 @@ class Menu extends Model
     use HasFactory;
 
     protected $table = "menus";
-    protected $fillable = ["name", "type_id", "price", "description", "photo"];
+    protected $fillable = ["name", "type_id", "price", "original_price", "description", "photo"];
 
     public function type(){
         return $this->belongsTo(Type::class);

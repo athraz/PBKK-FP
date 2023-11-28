@@ -10,7 +10,7 @@ class PromoMenu extends Model
     use HasFactory;
 
     protected $table = "promo_menu";
-    protected $fillable = ["promo_id", "menu_id", "original_price"];
+    protected $fillable = ["promo_id", "menu_id"];
 
     public function promo(){
         return $this->belongsTo(Promo::class);
