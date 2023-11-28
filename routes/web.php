@@ -31,7 +31,7 @@ Route::get('/profile', [ProfileController::class, 'edit'])->middleware(['auth'])
 Route::patch('/profile', [ProfileController::class, 'update'])->middleware(['auth'])->name('profile.update');
 Route::delete('/profile', [ProfileController::class, 'destroy'])->middleware(['auth'])->name('profile.destroy');
 
-Route::get('/menu', [MenuController::class, 'index'])->middleware(['auth'])->name('menu');
+Route::get('/menu', [MenuController::class, 'index'])->name('menu');
 Route::post('/menu', [MenuController::class, 'store'])->middleware(['auth']);
 Route::get('/menu/create', [MenuController::class, 'create'])->middleware(['auth', 'admin']);
 Route::get('/menu/{id}', [MenuController::class, 'show'])->middleware(['auth'])->name('menu.show');
@@ -65,7 +65,7 @@ Route::post('/user', [UserController::class, 'store'])->middleware(['auth', 'adm
 Route::get('/user/create', [UserController::class, 'create'])->middleware(['auth', 'admin']);
 Route::delete('/user/{id}', [UserController::class, 'destroy'])->middleware(['auth', 'admin']);
 
-Route::get('/promo', [PromoController::class, 'index'])->middleware(['auth'])->name('promo');
+Route::get('/promo', [PromoController::class, 'index'])->name('promo');
 Route::post('/promo', [PromoController::class, 'store'])->middleware(['auth']);
 Route::get('/promo/create', [PromoController::class, 'create'])->middleware(['auth', 'admin']);
 

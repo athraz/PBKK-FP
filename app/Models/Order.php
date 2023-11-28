@@ -20,7 +20,7 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function order_menu(){
+    public function orderMenu(){
         return $this->hasMany(OrderMenu::class);
     }
 }

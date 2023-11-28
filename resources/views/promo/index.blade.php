@@ -4,22 +4,24 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('These are our promos!') }}
             </h2>
+            @if(Auth::check() && Auth::user()->role == 'admin')
             <a href="/promo/create">
                 <x-primary-button>
                     {{ __('Add Promo') }}
                 </x-primary-button>
             </a>
+            @endif
         </div>
     </x-slot>
 
     @php
     $activepromo = $promos->where('is_active', 1)->first();
-    $notactivepromos = $promos->where('is_active', 0);
+    $notactivepromos = $promos->where('is_active', 0)->where('start_time', '>', now());
     @endphp
 
     <div class="flex flex-wrap justify-center">
         <div class="w-4/5 p-4">
-            @if($activepromo->count() > 0)
+            @if($activepromo !== null && $activepromo->count() > 0)
             <div class="w-full p-4" style="margin-bottom: 10px">
                 <div class="bg-white shadow-lg rounded-lg p-4 mb-8" style="display: flex; flex-direction: column; overflow: hidden;">
                     <h2 class="font-semibold text-lg text-gray-800 leading-tight mb-2 p-4">Active Promo: {{$activepromo->name}} </h2>
@@ -59,39 +61,39 @@
                 </div>
             </div>
             @endif
-            @if ($notactivepromos->count() > 0)
+            @if ($notactivepromos !== null && $notactivepromos->count() > 0)
             <div class="w-full p-4" style="margin-bottom: 30px">
                 <div class="bg-white shadow-lg rounded-lg p-4 mb-8" style="display: flex; flex-direction: column; overflow: hidden;">
                     <h2 class="font-semibold text-lg text-gray-800 leading-tight mb-2 p-4">Upcoming Promos</h2>
                     <div>
                         <div class="flex mb-3" style="height: 100%;">
                             <div class="w-1/4 px-4 flex items-center" style="height: 100%; overflow: hidden;">
-                                <h3 class="text-lg font-semibold">Name</h3>
+                                <h3 class="text-md font-semibold">Name</h3>
                             </div>
                             <div class="w-1/4 px-4 flex items-center" style="height: 100%; overflow: hidden;">
-                                <h3 class="text-lg font-semibold">Discount (%)</h3>
+                                <h3 class="text-md font-semibold">Discount (%)</h3>
                             </div>
                             <div class="w-1/4 px-4 flex items-center" style="height: 100%; overflow: hidden;">
-                                <h3 class="text-lg font-semibold">Start Time</h3>
+                                <h3 class="text-md font-semibold">Start Time</h3>
                             </div>
                             <div class="w-1/4 px-4 flex items-center" style="height: 100%; overflow: hidden;">
-                                <h3 class="text-lg font-semibold">End Time</h3>
+                                <h3 class="text-md font-semibold">End Time</h3>
                             </div>
                         </div>
                         <hr class="my-3">
                         @foreach($notactivepromos as $promo)
                         <div class="flex mb-3" style="height: 100%;">
                             <div class="w-1/4 px-4 flex items-center" style="height: 100%; overflow: hidden;">
-                                <h3 class="text-lg font-semibold">{{ $promo->name }}</h3>
+                                <h3 class="text-md font-semibold">{{ $promo->name }}</h3>
                             </div>
                             <div class="w-1/4 px-4 flex items-center" style="height: 100%; overflow: hidden;">
-                                <h3 class="text-lg font-semibold">{{ $promo->discount }}</h3>
+                                <h3 class="text-md font-semibold">{{ $promo->discount }}</h3>
                             </div>
                             <div class="w-1/4 px-4 flex items-center" style="height: 100%; overflow: hidden;">
-                                <h3 class="text-lg font-semibold">{{ $promo->start_time }}</h3>
+                                <h3 class="text-md font-semibold">{{ $promo->start_time }}</h3>
                             </div>
                             <div class="w-1/4 px-4 flex items-center" style="height: 100%; overflow: hidden;">
-                                <h3 class="text-lg font-semibold">{{ $promo->end_time }}</h3>
+                                <h3 class="text-md font-semibold">{{ $promo->end_time }}</h3>
                             </div>
                         </div>
                         @endforeach

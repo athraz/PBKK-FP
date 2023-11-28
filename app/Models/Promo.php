@@ -12,7 +12,7 @@ class Promo extends Model
     protected $table = "promos";
     protected $fillable = ["name", "discount", "start_time", "end_time", "is_active"];
 
-    public function promo_menu(){
+    public function promoMenu(){
         return $this->hasMany(PromoMenu::class);
     }
 }
