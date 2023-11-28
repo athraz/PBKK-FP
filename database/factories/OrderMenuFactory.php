@@ -2,12 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\Menu;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Type>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\OrderMenu>
  */
-class TypeFactory extends Factory
+class OrderMenuFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -16,9 +17,9 @@ class TypeFactory extends Factory
      */
     public function definition(): array
     {
-        $typearray = ["Mie", "Nasi", "Kue", "Es Krim", "Sate", "Puding", "Teh", "Kopi"];
         return [
-            'name' => $this->faker->randomElement($typearray)
+            'menu_id' => mt_rand(1, 16),
+            'quantity' => mt_rand(1, 5)
         ];
     }
 }
