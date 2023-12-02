@@ -11,7 +11,7 @@ class OrderFactory extends Factory
         return [
             'user_id' => mt_rand(2, 11),
             'total_price' => 0,
-            'payment_method' => mt_rand(1, 3),
+            'payment_method' => $this->faker->randomElement(['Cash', 'Transfer Bank', 'E-Wallet']),
             'address' => $this->faker->address,
             'status' => 'Waiting',
             'employee_id' => mt_rand(2, 11)

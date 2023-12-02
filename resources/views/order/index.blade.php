@@ -115,10 +115,10 @@
                                         <h3 class="text-md font-semibold">{{$menuorder->quantity}}</h3>
                                     </div>
                                     <div class="w-1/6 px-4 flex items-center justify-end" style="height: 100%; overflow: hidden;">
-                                        <p class="text-gray-950">Rp {{ number_format($menuorder->menu->price, 2) }}</p>
+                                        <p class="text-gray-950">Rp {{ number_format($menuorder->order_price, 2) }}</p>
                                     </div>
                                     <div class="w-1/6 px-4 flex items-center justify-end" style="height: 100%; overflow: hidden;">
-                                        <p class="text-gray-950">Rp <span id="subtotal_<?= $menuorder['menu_id'] ?>">{{ $menuorder->menu->price * $menuorder['quantity'] }}</span></p>
+                                        <p class="text-gray-950">Rp <span id="subtotal_<?= $menuorder['menu_id'] ?>">{{ $menuorder->order_price * $menuorder['quantity'] }}</span></p>
                                     </div>
                                 </div>
                                 @endforeach
@@ -252,15 +252,7 @@
                                             @endif
                                         </div>
                                         <div class="w-1/5 px-4 flex items-center justify-end" style="height: 100%; overflow: hidden;">
-                                            <h3 class="text-md font-semibold">(
-                                                @if ($order->payment_method == 1)
-                                                Cash
-                                                @elseif ($order->payment_method == 2)
-                                                Transfer Bank
-                                                @elseif ($order->payment_method == 3)
-                                                E-Wallet
-                                                @endif)
-                                            </h3>
+                                            <h3 class="text-md font-semibold">({{ $order->payment_method }})</h3>
                                         </div>
                                     </div>
                                 </div>

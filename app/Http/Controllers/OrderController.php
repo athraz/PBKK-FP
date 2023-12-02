@@ -33,7 +33,7 @@ class OrderController extends Controller
         // dd($request->address);
         $request->validate(
             [
-                'payment_method' => 'gt:0',
+                'payment_method' => 'required|not_in:null',
                 'address' => 'required'
             ],
             [
@@ -58,6 +58,7 @@ class OrderController extends Controller
                 'order_id' => $order->id,
                 'menu_id' => $cart->menu_id,
                 'quantity' => $cart->quantity,
+                'order_price' => Menu::findOrFail($cart->menu_id)->price
             ]);
         }
 

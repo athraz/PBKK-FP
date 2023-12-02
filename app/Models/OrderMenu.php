@@ -10,7 +10,7 @@ class OrderMenu extends Model
     use HasFactory;
     
     protected $table = "order_menu";
-    protected $fillable = ["order_id", "menu_id", "quantity"];
+    protected $fillable = ["order_id", "menu_id", "quantity", "order_price"];
 
     public function order(){
         return $this->belongsTo(Order::class);

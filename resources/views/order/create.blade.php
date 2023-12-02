@@ -59,10 +59,10 @@
         <div class="mt-4 mb-10">
             <x-input-label for="payment_method" :value="__('Payment Method')" />
             <select id="payment_method" name="payment_method" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full">
-                <option value="0" selected>-</option>
-                <option value="1">Cash</option>
-                <option value="2">Transfer Bank</option>
-                <option value="3">E-Wallet</option>
+                <option value="null" selected>-</option>
+                <option value="Cash">Cash</option>
+                <option value="Transfer Bank">Transfer Bank</option>
+                <option value="E-wallet">E-Wallet</option>
             </select>
 
             <x-input-error :messages="$errors->get('payment_method')" class="mt-2" />

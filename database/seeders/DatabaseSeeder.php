@@ -45,8 +45,10 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Cappuccino', 'type_id' => 4, 'price' => $price = $faker->randomFloat(2, 15000, 40000), 'original_price' => $price, 'description' => $faker->sentence(mt_rand(20, 40)), 'photo' => '16.jpg'],
         ]);
 
-        DB::table('users')->insert(['name' => 'admin', 'email' => 'admin@gmail.com', 'password' => Hash::make('12345678'), 'role' => 'admin']);
+        DB::table('users')->insert(['name' => 'Admin', 'email' => 'admin@gmail.com', 'password' => Hash::make('12345678'), 'role' => 'admin']);
         User::factory(10)->create();
+        DB::table('users')->insert(['name' => 'Yanto', 'email' => 'yanto@gmail.com', 'password' => Hash::make('12345678'), 'role' => 'employee']);
+
         Review::factory(50)->create();
         Order::factory(10)->has(OrderMenu::factory(6))->create();
 
@@ -68,7 +70,7 @@ class DatabaseSeeder extends Seeder
             $totalprice = 0;
             $ordermenus = OrderMenu::where('order_id', $order->id)->get();
             foreach ($ordermenus as $ordermenu) {
-                $totalprice = $totalprice + $ordermenu->menu->price * $ordermenu->quantity;
+                $totalprice = $totalprice + $ordermenu->order_price * $ordermenu->quantity;
             }
             $order->update(['total_price' => $totalprice]);
         }

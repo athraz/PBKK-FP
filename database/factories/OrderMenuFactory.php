@@ -18,8 +18,9 @@ class OrderMenuFactory extends Factory
     public function definition(): array
     {
         return [
-            'menu_id' => mt_rand(1, 16),
-            'quantity' => mt_rand(1, 5)
+            'menu_id' => $id = mt_rand(1, 16),
+            'quantity' => mt_rand(1, 5),
+            'order_price' => Menu::findOrFail($id)->price
         ];
     }
 }
