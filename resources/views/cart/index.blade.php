@@ -12,6 +12,18 @@
         </div>
     </x-slot>
 
+    @if (session('status') == 'success')
+    <div class="flex justify-center items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 relative" role="alert">
+        <svg class="absolute top-0 right-0 m-2 cursor-pointer" width="18" height="18" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16" onclick="this.parentElement.style.display='none'">
+            <path d="M3.646 3.646a.5.5 0 0 1 .708 0L8 7.293l3.646-3.647a.5.5 0 0 1 .708 0 .5.5 0 0 1 0 .708L8.707 8l3.647 3.646a.5.5 0 0 1 0 .708a.5.5 0 0 1-.708 0L8 8.707l-3.646 3.647a.5.5 0 0 1-.708 0a.5.5 0 0 1 0-.708L7.293 8 3.646 4.354a.5.5 0 0 1 0-.708z" />
+        </svg>
+        <span class="sr-only">Info</span>
+        <div>
+            <span class="font-large">Success!</span> {{ session('message') }}
+        </div>
+    </div>
+    @endif
+
     @php
     $usercarts = $carts->where('user_id', Auth::user()->id);
     @endphp

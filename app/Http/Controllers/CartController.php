@@ -40,7 +40,7 @@ class CartController extends Controller
             ]);
         }
 
-        return redirect('/menu');
+        return redirect('/menu')->with(['status' => 'success', 'message' => 'Menu added to cart!']);
     }
 
     public function update(Request $request)
@@ -74,6 +74,6 @@ class CartController extends Controller
     public function destroy(Request $request)
     {
         Cart::findOrFail($request->id)->delete();
-        return redirect('/cart');
+        return redirect('/cart')->with(['status' => 'success', 'message' => 'Menu removed from cart!']);
     }
 }
