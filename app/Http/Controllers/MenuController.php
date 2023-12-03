@@ -6,11 +6,21 @@ use App\Models\Menu;
 use App\Models\OrderMenu;
 use App\Models\Review;
 use App\Models\Type;
+use App\Models\Promo;
+use App\Models\PromoMenu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
 class MenuController extends Controller
 {
+    public function dashboard(){
+        $menus = Menu::all();
+        $promos = Promo::all();
+        $promomenus = PromoMenu::all();
+        $reviews = Review::all();
+        return view('dashboard', compact('menus', 'promos', 'promomenus', 'reviews'));
+    }
+
     public function index()
     {
         $menus = Cache::remember('menus', 600, function () {
