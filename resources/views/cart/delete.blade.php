@@ -1,4 +1,4 @@
-<div class="modal-fade" id="ModalDelete{{$cart->id}}" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="ModalDelete{{$cart->id}}" role="dialog" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">                
             <div class="flex flex-wrap justify-center">
