@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Menu;
+use App\Models\Order;
 use App\Models\OrderMenu;
 use App\Models\Review;
 use App\Models\Type;
@@ -86,7 +87,9 @@ class MenuController extends Controller
         $menu = Menu::findOrFail($id);
         $types = Type::all();
         $reviews = Review::all();
-        return view('menu.show', compact('menu', 'types', 'reviews'));
+        $orders = Order::all();
+        $ordermenus = OrderMenu::all();
+        return view('menu.show', compact('menu', 'types', 'reviews', 'orders', 'ordermenus'));
     }
 
     public function edit($id)
