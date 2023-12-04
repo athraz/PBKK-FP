@@ -70,6 +70,7 @@
                                             {{ __('Delete') }}
                                         </button>
                                     </div>
+                                    @include('cart.delete')
                                 </div>
                                 @endforeach
                             </div>
